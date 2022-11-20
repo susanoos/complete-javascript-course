@@ -4,4 +4,4 @@
 const x = 'david';
 
 const calcAge = birthYear => 2022 - birthYear;
-console.log(x);
+console.log(calcAge(1998));
