@@ -16,7 +16,6 @@
 const number = document.querySelector('.number');
 const message = document.querySelector('.message');
 const body = document.querySelector('body');
-
 let scoreText = document.querySelector('.score');
 let highScore = document.querySelector('.highscore');
 let score = 20;
@@ -41,7 +40,7 @@ const game = () => {
       // when player guesses correct number
     } else if (guess === randomNumber) {
       number.textContent = randomNumber;
-      message.textContent = 'Correct Number!';
+      message.textContent = 'Correct Number! 🎉';
       highScoreNum += score;
       highScore.textContent = highScoreNum;
 
@@ -56,7 +55,7 @@ const game = () => {
         score--;
         scoreText.textContent = score;
       } else {
-        message.textContent = 'Game over!';
+        message.textContent = 'Game over! 😟';
         score = 0;
         scoreText.textContent = score;
       }
@@ -68,7 +67,7 @@ const game = () => {
         score--;
         scoreText.textContent = score;
       } else {
-        message.textContent = 'Game over!';
+        message.textContent = 'Game over! 😟';
         score = 0;
         scoreText.textContent = score;
         body.style.backgroundColor = '#D2042D';
@@ -82,12 +81,11 @@ const again = () => {
     score = 20;
     body.style.backgroundColor = '#222';
     number.textContent = '?';
+    number.style.width = '15rem';
     scoreText.textContent = score;
     message.textContent = 'Start guessing...';
     randomNumber = randomNumberGenerator();
-    Number((document.querySelector('.guess').value = ''));
-
-    // game();
+    document.querySelector('.guess').value = '';
   });
 };
 game();
