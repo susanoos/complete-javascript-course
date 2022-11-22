@@ -89,10 +89,10 @@ const hold = () => {
     }
 
     // winning conditions will add to the player with the score equal to or greater than, adds 'player--winner' class and removes 'player--active' class
-    if (p1Score >= 10) {
+    if (p1Score >= 75) {
       player1.classList.add('player--winner');
       player2.classList.remove('player--active');
-    } else if (p2Score >= 10) {
+    } else if (p2Score >= 75) {
       player2.classList.add('player--winner');
       player1.classList.remove('player--active');
     }
