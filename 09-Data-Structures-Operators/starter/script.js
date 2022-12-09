@@ -52,7 +52,117 @@ const restaurant = {
   },
 };
 
-// ================================================================================================
+// for of loop
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+for (const item of menu) console.log(item);
+
+// getting current index along with the element
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1}: ${el}`);
+}
+// ===============================================================
+// Coding Challenge 1
+// const game = {
+//   team1: 'Bayern Munich',
+//   team2: 'Borrussia Dortmund',
+//   players: [
+//     [
+//       'Neuer',
+//       'Pavard',
+//       'Martinez',
+//       'Alaba',
+//       'Davies',
+//       'Kimmich',
+//       'Goretzka',
+//       'Coman',
+//       'Muller',
+//       'Gnarby',
+//       'Lewandowski',
+//     ],
+//     [
+//       'Burki',
+//       'Schulz',
+//       'Hummels',
+//       'Akanji',
+//       'Hakimi',
+//       'Weigl',
+//       'Witsel',
+//       'Hazard',
+//       'Brandt',
+//       'Sancho',
+//       'Gotze',
+//     ],
+//   ],
+//   score: '4:0',
+//   scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+//   date: 'Nov 9th, 2037',
+//   odds: {
+//     team1: 1.33,
+//     x: 3.25,
+//     team2: 6.5,
+//   },
+// };
+// // Step 1 make 2 arrays with the teams from the game object
+// const [players1, players2] = game.players;
+// console.log(players1);
+// console.log(players2);
+
+// // Step 2 creat 'gk' variable
+// const [gk1, ...fieldPlayers1] = players1;
+// const [gk2, ...fieldPlayers2] = players2;
+// console.log(gk1, fieldPlayers1);
+// console.log(gk2, fieldPlayers2);
+
+// // Step 3 create arrray to hold all players\
+// const allPlayers = [...players1, ...players2];
+// console.log(allPlayers);
+
+// // Step 4 substitute players in team 1
+// const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+// console.log(players1Final);
+
+// // Step 5 create variable for each odd from game object
+// const { team1, x: draw, team2 } = game.odds;
+// console.log(team1, draw, team2);
+
+// // Step 6 create function 'printGoals'
+// const printGoals = (...players) => {
+//   console.log(`${players.length} goals were scored`);
+// };
+// printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
+// printGoals(...game.scored);
+
+// // Step 7 which team is more likely to win
+// team1 < team2 && console.log('Team 1 is more likely to win');
+
+// console.log(players1, players2);
+
+// =================================================================================================
+// nullish operator: if variables are not null or undefined then the code will run
+// restaurant.numGuests = 0;
+// const guests = restaurant.numGuests || 10;
+// console.log(guests);
+
+// const guestsCorrect = restaurant.numGuests ?? 10;
+// console.log(guestsCorrect);
+
+// short-circuiting
+// const falsyValues = [false, 0, -0, "", null, undefined, NaN, 0n];
+// restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+// // ================================================ OR ================================================ //
+// // logs 3
+// console.log(3 || 'david');
+// // logs 'david
+// console.log('' || 'david');
+// // logs true
+// console.log(true || 0);
+// // logs null
+// console.log(undefined || null);
+
+// // setting a default value if it does not exist
+// const guests = restaurant.numGuests || 10;
+// console.log(guests);
+// // ================================================================================================
 
 // restaurant.orderPizza('mushrooms', 'pineapple', 'pepperoni', 'bacon');
 
