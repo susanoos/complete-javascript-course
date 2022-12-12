@@ -76,35 +76,96 @@ const restaurant = {
   },
 };
 
-// Challenge 4
-const gameEvents = new Map([
-  [17, '⚽️ GOAL'],
-  [36, '🔁 Substitution'],
-  [47, '⚽️ GOAL'],
-  [61, '🔁 Substitution'],
-  [64, '🔶 Yellow card'],
-  [69, '🔴 Red card'],
-  [70, '🔁 Substitution'],
-  [72, '🔁 Substitution'],
-  [76, '⚽️ GOAL'],
-  [80, '⚽️ GOAL'],
-  [92, '🔶 Yellow card'],
-]);
+// Strings
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
 
-// Step 1
-const events = [...new Set(gameEvents.values())];
-console.log(events);
-// Step 2
-gameEvents.delete(64);
-console.log(gameEvents);
-// Step 3
-const average = 90 / gameEvents.size;
-console.log(`An event happened on average every ${average} minutes`);
-// Step 4
-for (const [min, event] of gameEvents) {
-  const half = min <= 45 ? 'FIRST' : 'SECOND';
-  console.log(`[${half} HALF] ${min}: ${event}`);
-}
+// PART 2
+const passenger = 'daViD';
+const passengerLower = passenger.toLowerCase();
+const passengerCorrect =
+  passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect); // logs 'David
+
+// comparing emails
+const email = 'david@gmail.com';
+const loginEmail = '  DaVid@Gmail.com \n';
+
+// const lowerLogin = loginEmail.toLowerCase();
+// // removing white space
+// const trimmedEmail = lowerLogin.trim();
+// console.log(trimmedEmail); // logs 'david@gmail.com'
+// same as above but in one line
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail); // logs 'david@gmail.com'
+
+// replacing
+const announcement =
+  'All passengers come to boarding door 24, Boarding door 24!';
+console.log(announcement.replace('door', 'gate'));
+console.log(announcement.replaceAll('door', 'gate'));
+
+// Practice
+const checkBaggage = items => {
+  const baggage = items.toLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are NOT allowed on board!');
+  } else console.log('Welcome!');
+};
+
+checkBaggage('I have a Laptop, Knife, and snackies');
+checkBaggage('I have a phone, and snackies');
+checkBaggage('I have a Gun, socks, and water');
+
+// ==================================================================================================================
+// STRINGS PART 1
+// console.log(plane[1]);
+// console.log('B737'[0]);
+// console.log(plane.length);
+
+// // returns the index the char is found at
+// console.log(airline.indexOf('r'));
+
+// // slice method
+// console.log(airline.slice(4)); // Air Portugal is logged
+// console.log(airline.slice(4, 7)); // Air is logged
+
+// console.log(airline.slice(0, airline.indexOf(' '))); // logs 'TAP'
+// console.log(airline.slice(airline.lastIndexOf(' ') + 1)); // logs 'Portugal'
+
+// console.log(airline.slice(-2)); // logs 'al'
+// console.log(airline.slice(1, -1)); // logs 'AP Air Portuga'
+
+// =====================================================================================================================
+// Challenge 4
+// const gameEvents = new Map([
+//   [17, '⚽️ GOAL'],
+//   [36, '🔁 Substitution'],
+//   [47, '⚽️ GOAL'],
+//   [61, '🔁 Substitution'],
+//   [64, '🔶 Yellow card'],
+//   [69, '🔴 Red card'],
+//   [70, '🔁 Substitution'],
+//   [72, '🔁 Substitution'],
+//   [76, '⚽️ GOAL'],
+//   [80, '⚽️ GOAL'],
+//   [92, '🔶 Yellow card'],
+// ]);
+
+// // Step 1
+// const events = [...new Set(gameEvents.values())];
+// console.log(events);
+// // Step 2
+// gameEvents.delete(64);
+// console.log(gameEvents);
+// // Step 3
+// const average = 90 / gameEvents.size;
+// console.log(`An event happened on average every ${average} minutes`);
+// // Step 4
+// for (const [min, event] of gameEvents) {
+//   const half = min <= 45 ? 'FIRST' : 'SECOND';
+//   console.log(`[${half} HALF] ${min}: ${event}`);
+// }
 
 // another way of adding elements to a map
 // const question = new Map([
