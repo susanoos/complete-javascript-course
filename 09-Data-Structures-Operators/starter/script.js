@@ -79,43 +79,45 @@ const restaurant = {
 // Strings
 const airline = 'TAP Air Portugal';
 const plane = 'A320';
+// PART 3
 
+// =================================================================================================================
 // PART 2
-const passenger = 'daViD';
-const passengerLower = passenger.toLowerCase();
-const passengerCorrect =
-  passengerLower[0].toUpperCase() + passengerLower.slice(1);
-console.log(passengerCorrect); // logs 'David
+// const passenger = 'daViD';
+// const passengerLower = passenger.toLowerCase();
+// const passengerCorrect =
+//   passengerLower[0].toUpperCase() + passengerLower.slice(1);
+// console.log(passengerCorrect); // logs 'David
 
 // comparing emails
-const email = 'david@gmail.com';
-const loginEmail = '  DaVid@Gmail.com \n';
+// const email = 'david@gmail.com';
+// const loginEmail = '  DaVid@Gmail.com \n';
 
 // const lowerLogin = loginEmail.toLowerCase();
 // // removing white space
 // const trimmedEmail = lowerLogin.trim();
 // console.log(trimmedEmail); // logs 'david@gmail.com'
 // same as above but in one line
-const normalizedEmail = loginEmail.toLowerCase().trim();
-console.log(normalizedEmail); // logs 'david@gmail.com'
+// const normalizedEmail = loginEmail.toLowerCase().trim();
+// console.log(normalizedEmail); // logs 'david@gmail.com'
 
-// replacing
-const announcement =
-  'All passengers come to boarding door 24, Boarding door 24!';
-console.log(announcement.replace('door', 'gate'));
-console.log(announcement.replaceAll('door', 'gate'));
+// // replacing
+// const announcement =
+//   'All passengers come to boarding door 24, Boarding door 24!';
+// console.log(announcement.replace('door', 'gate'));
+// console.log(announcement.replaceAll('door', 'gate'));
 
-// Practice
-const checkBaggage = items => {
-  const baggage = items.toLowerCase();
-  if (baggage.includes('knife') || baggage.includes('gun')) {
-    console.log('You are NOT allowed on board!');
-  } else console.log('Welcome!');
-};
+// // Practice
+// const checkBaggage = items => {
+//   const baggage = items.toLowerCase();
+//   if (baggage.includes('knife') || baggage.includes('gun')) {
+//     console.log('You are NOT allowed on board!');
+//   } else console.log('Welcome!');
+// };
 
-checkBaggage('I have a Laptop, Knife, and snackies');
-checkBaggage('I have a phone, and snackies');
-checkBaggage('I have a Gun, socks, and water');
+// checkBaggage('I have a Laptop, Knife, and snackies');
+// checkBaggage('I have a phone, and snackies');
+// checkBaggage('I have a Gun, socks, and water');
 
 // ==================================================================================================================
 // STRINGS PART 1
