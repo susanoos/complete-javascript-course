@@ -1,8 +1,6 @@
 'use strict';
 
 // Data needed for a later exercise
-const flights =
-  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
 const weekdays = [
   'Sunday',
@@ -76,10 +74,76 @@ const restaurant = {
   },
 };
 
+// const flights =
+//   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+// for (const flight of flights.split('+')) {
+//   const [type, from, to, time] = flight.split(';');
+//   const output = `${type.startsWith('_Delayed') ? '🔴' : ''}${type.replaceAll(
+//     '_',
+//     ' '
+//   )} from ${from.slice(0, 3).toUpperCase()} to ${to
+//     .slice(0, 3)
+//     .toUpperCase()} (${time.replace(':', 'h')})`.padStart(40);
+//   console.log(output);
+// }
+
+// // Challenge 4
+// document.body.append(document.createElement('textarea'));
+// document.body.append(document.createElement('button'));
+
+// const btn = document.querySelector('button');
+
+// const camelCase = str => {
+//   const strLower = str.toLowerCase().trim().split('_');
+//   for (let i = 1; i < strLower.length; i++) {
+//     strLower[i] =
+//       strLower[i].toUpperCase().slice(0, 1) +
+//       strLower[i].slice(1).toLowerCase();
+//   }
+//   console.log(`${strLower.join('')} ✅`);
+// };
+// btn.addEventListener('click', () => {
+//   const text = document.querySelector('textarea').value;
+//   camelCase(text);
+// });
+// camelCase('underscore_case');
+// camelCase('Some_variable');
+// camelCase(' first_name');
+// camelCase(' calculate_AGE');
+// camelCase('delayed_departues');
+
+// =====================================================================================================================
 // Strings
-const airline = 'TAP Air Portugal';
-const plane = 'A320';
-// PART 3
+// repeat
+// const message2 = 'Bad weather... All departues delayed';
+// console.log(message2.repeat(3)); // logs 'Bad weather... All departues delayedBad weather... All departues delayedBad weather... All departues delayed'
+
+// // padding string
+// const message = 'Go to gate 23';
+// console.log(message.padStart(25, '+').padEnd(30, '+')); // logs '++++++++++++Go to gate 23+++++'
+
+// // EXAMPLE
+// const maskCreditCard = card => {
+//   const str = card + '';
+//   const maskCard = str.slice(-4);
+//   return maskCard.padStart(str.length, '*');
+// };
+// console.log(maskCreditCard(1234567891234567));
+// console.log(maskCreditCard(1234567891567));
+
+// const airline = 'TAP Air Portugal';
+// const plane = 'A320';
+// // PART 3
+// const capitalizeName = name => {
+//   const names = name.split(' ');
+//   const namesUpper = [];
+//   for (const n of names) {
+//     namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+//   }
+//   console.log(namesUpper.join(' '));
+// };
+// capitalizeName('david escobar');
 
 // =================================================================================================================
 // PART 2
