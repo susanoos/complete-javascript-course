@@ -74,3 +74,56 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+// let arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+// let newArr = arr.slice(2); // 'slice' method returns a new array with the extracted parts
+// console.log(newArr);
+// newArr = arr.slice(2, 4); // 'slice' method with end parameter ['c', 'd']
+// console.log(newArr);
+// newArr = arr.slice(-2); // starts at the end ['f', 'g']
+// console.log(newArr);
+
+// // 'splice' mutates orginial array
+// // console.log(arr.splice(2)); // returns new array from ['c']
+// arr.splice(-1); // '-1' removes last element
+// console.log(arr); // logs ['a', 'b']
+// arr.splice(1, 2);
+// console.log(arr); // removes ['c', 'b']
+
+// // 'reverse' mutates orginial array
+// arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+// const arr2 = ['c', 'd', 'e', 'f', 'g', 'a', 'b'];
+// console.log(arr2.reverse());
+// console.log(arr2);
+
+// // 'concat' combines 2 arrays
+// const letters = arr.concat(arr2);
+// console.log(letters); // logs ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'b', 'a', 'g', 'f', 'e', 'd', 'c']
+
+// new method 'at' also works on Strings
+// const arr = [24, 10, 9];
+// console.log(arr.at(0)); // logs 24
+// console.log(arr.at(-1)); // logs 9
+
+// 'forEach' method
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+console.log(
+  '---------------------------- FOR EACH ------------------------------------'
+);
+movements.forEach((movement, i, arr) => {
+  // takes a callback function
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You deposited: ${movement}`);
+  } else console.log(`Movement ${i + 1}: You withdrawn: ${movement}`);
+});
+
+console.log(
+  '---------------------------- FOR OF ------------------------------------'
+);
+
+// 'for of' loop
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You deposited: ${movement}`);
+  } else console.log(`Movement ${i + 1}: You withdrawn: ${movement}`);
+}
