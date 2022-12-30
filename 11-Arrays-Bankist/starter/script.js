@@ -64,14 +64,34 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+// Creating HTML elements
+const displayMovements = movements => {
+  // clears the HTML
+  containerMovements.innerHTML = '';
+  movements.forEach((movement, i) => {
+    const type = movement > 0 ? 'deposit' : 'withdrawal';
+    const html = `
+    <div class="movements__row">
+    <div class="movements__type movements__type--${type}">
+      ${i + 1} ${type}
+    </div>
+    <div class="movements__date">24/01/2037</div>
+    <div class="movements__value">${movement}</div>
+  </div>
+    `;
+    // adds created HTML
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+displayMovements(account1.movements);
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 /* let arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
@@ -133,8 +153,8 @@ const currencies = new Map([
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
 ]);
-*/
-// 'forEach' on maps and sets
+
+'forEach' on maps and sets
 currencies.forEach((value, key, map) => {
   console.log(`${key}: ${value}`);
 });
@@ -144,3 +164,40 @@ const currenciesUnique = new Set(['USD', 'EUR', 'GBP']);
 currenciesUnique.forEach((value, key, map) => {
   console.log(`${key}: ${value}`); // key is the same as the value
 });
+
+// ==============================================================================================
+// Coding Challenge 1
+const juliaDogs = [3, 5, 2, 12, 7];
+const juliaDogs2 = [9, 16, 6, 8, 3];
+const kateDogs = [4, 1, 15, 8, 3];
+const kateDogs2 = [10, 5, 6, 1, 4];
+const checkDogs = (dogsJulia, dogsKate) => {
+  const noCats = [...dogsJulia].slice(1, -2);
+  const totalDogs = noCats.concat(dogsKate);
+  // console.log(noCats);
+  // console.log(totalDogs);
+  totalDogs.forEach((age, i) => {
+    const isDog = age >= 3 ? 'dog 🐺' : 'puppy 🐶';
+    console.log(`Dog ${i + 1} is a ${isDog}`);
+  });
+};
+checkDogs(juliaDogs, kateDogs);
+console.log('==========================================================');
+checkDogs(juliaDogs2, kateDogs2);
+*/
+
+// ==============================================================================================
+// 'map' method returns a new array
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const euroToUsd = 1.1;
+const movementsUSD = movements.map(mov => mov * euroToUsd);
+console.log(movementsUSD);
+
+// has access to index and array
+const movementDescriptions = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+      mov
+    )}`
+);
+console.log(movementDescriptions);
