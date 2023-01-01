@@ -61,9 +61,6 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
 // Creating HTML elements
 const displayMovements = movements => {
   // clears the HTML
@@ -84,6 +81,29 @@ const displayMovements = movements => {
   });
 };
 displayMovements(account1.movements);
+
+const calcBalance = movements => {
+  const balance = movements.reduce((acc, mov) => (acc += mov));
+  labelBalance.textContent = `$${balance}`;
+};
+calcBalance(account1.movements);
+
+// creates username based on their name 'Steven Thomas Williams' => 'stw'
+const createUsername = acc => {
+  acc.forEach(acc => {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+createUsername(accounts);
+// console.log(accounts);
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+// LECTURES
 
 // const currencies = new Map([
 //   ['USD', 'United States dollar'],
@@ -184,7 +204,7 @@ const checkDogs = (dogsJulia, dogsKate) => {
 checkDogs(juliaDogs, kateDogs);
 console.log('==========================================================');
 checkDogs(juliaDogs2, kateDogs2);
-*/
+
 
 // ==============================================================================================
 // 'map' method returns a new array
@@ -201,3 +221,39 @@ const movementDescriptions = movements.map(
     )}`
 );
 console.log(movementDescriptions);
+
+
+// creates a shallow copy of an array
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const deposits = movements.filter(mov => mov > 0);
+const withdrawals = movements.filter(mov => mov < 0);
+console.log(withdrawals);
+console.log(deposits);
+
+
+// '.reduce' will combine all array elements into a single number, takes 2 parameters, callback function and inital value
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// accumulator -> SNOWBALL
+const balance = movements.reduce((acc, cur, i, arr) => {
+  console.log(`Iteration ${i}: ${acc}`);
+  return (acc += cur);
+}, 0);
+console.log(balance);
+
+// Max value
+const max = movements.reduce((acc, cur) => (acc > cur ? acc : cur));
+
+console.log(max);
+*/
+// Coding Challenge 2
+// test data [5, 2, 4, 1, 15, 8, 3], [16, 6, 10, 5, 6, 1, 4]
+const calcAverageHumanAge = ages => {
+  const dogToHumanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+  const adults = dogToHumanAges.filter(age => age >= 18);
+  const average =
+    adults.reduce((acc, age) => (acc += age), 0) / dogToHumanAges.length;
+  console.log(dogToHumanAges);
+  console.log(adults);
+  console.log(average);
+};
+calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
