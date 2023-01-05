@@ -1,5 +1,5 @@
 'use strict';
-
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -73,20 +73,40 @@ const displayMovements = movements => {
       ${i + 1} ${type}
     </div>
     <div class="movements__date">24/01/2037</div>
-    <div class="movements__value">${movement}</div>
+    <div class="movements__value">$${movement}</div>
   </div>
     `;
     // adds created HTML
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
 
-const calcBalance = movements => {
-  const balance = movements.reduce((acc, mov) => (acc += mov));
-  labelBalance.textContent = `$${balance}`;
+const calcBalance = accounts => {
+  accounts.balance = accounts.movements.reduce((acc, mov) => (acc += mov));
+  labelBalance.textContent = `$${accounts.balance}`;
 };
-calcBalance(account1.movements);
+
+const calcDisplaySummary = accounts => {
+  const incomes = accounts.movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `$${incomes}`;
+
+  const withdrawals = accounts.movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `$${Math.abs(withdrawals)}`; //'Math.abs' removes the -
+
+  const interests = accounts.movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * accounts.interestRate) / 100)
+    .filter((int, i, arr) => {
+      // console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `$${interests}`;
+};
 
 // creates username based on their name 'Steven Thomas Williams' => 'stw'
 const createUsername = acc => {
@@ -100,6 +120,85 @@ const createUsername = acc => {
 };
 createUsername(accounts);
 // console.log(accounts);
+
+const updateUI = accounts => {
+  displayMovements(accounts.movements);
+
+  calcBalance(accounts);
+
+  calcDisplaySummary(accounts);
+};
+
+// Event Handlers
+// Logging in
+let currentAccount;
+btnLogin.addEventListener('click', e => {
+  e.preventDefault();
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // console.log(`LOGIN`);
+    labelWelcome.textContent = `Welcome back ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+
+    updateUI(currentAccount);
+  }
+  // console.log(currentAccount);
+});
+
+// Transferring between accounts
+btnTransfer.addEventListener('click', e => {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+  inputTransferAmount.value = inputTransferTo.value = '';
+
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentAccount.balance >= amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    // pushing the transfer
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+    updateUI(currentAccount);
+  }
+});
+
+// Deleting the account
+btnClose.addEventListener('click', e => {
+  e.preventDefault();
+  if (
+    currentAccount.username === inputClosePin.value &&
+    currentAccount.pin === Number(inputClosePin.value)
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    accounts.splice(index, 1);
+    containerApp.style.opacity = 0;
+    labelWelcome.textContent = `Log in to get started`;
+  }
+  inputCloseUsername.value = inputTransferTo.value = '';
+});
+
+btnLoan.addEventListener('click', e => {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+  if (amount > 0 && currentAccount.movements.some(mov => mov > amount * 0.1)) {
+    currentAccount.movements.push(amount);
+    updateUI(currentAccount);
+  }
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -244,7 +343,7 @@ console.log(balance);
 const max = movements.reduce((acc, cur) => (acc > cur ? acc : cur));
 
 console.log(max);
-*/
+
 // Coding Challenge 2
 // test data [5, 2, 4, 1, 15, 8, 3], [16, 6, 10, 5, 6, 1, 4]
 const calcAverageHumanAge = ages => {
@@ -257,3 +356,50 @@ const calcAverageHumanAge = ages => {
   console.log(average);
 };
 calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+
+
+// Method Chaining
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const euroToUsd = 1.1;
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0) // recall returns an array
+  .map((mov, i, arr) => {
+    // checking the prev array
+    // console.log(arr); // logs the positives
+    return mov * euroToUsd;
+  }) // recall returns an array
+  // .map((mov) => mov * euroToUsd) // recall returns an array
+  .reduce((acc, mov) => (acc += mov), 0); // returns a value
+console.log(totalDepositsUSD);
+
+
+// Coding Challenge 3
+const calcAverageHumanAge = ages => {
+  const dogToHumanAges = ages
+    .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+    .filter(age => age >= 18)
+    .reduce((acc, age, i, arr) => (acc += age / arr.length), 0);
+  console.log(dogToHumanAges);
+};
+calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+
+// 'find' method retrieves the first element from an array depending on the condition
+const firstWithdrawl = movements.find(mov => mov < 0);
+console.log(firstWithdrawl);
+
+console.log(accounts);
+const account = accounts.find(acc => acc.owner === 'Jessica Davis'); // Gets the object with the owner 'Jessica Davis'
+console.log(account);
+
+// Mini challenge same as above ^
+for (const acc of accounts) {
+  if (acc.owner === 'Jessica Davis') console.log(acc);
+}
+
+'.some' returns true or false checks a condition
+const anyDeposits = movements.some(mov => mov > 0);
+
+'.every' return true or false if every element passes the condition
+console.log(movements.every(mov => mov > 0)); // logs false due to withdrawals
+*/
