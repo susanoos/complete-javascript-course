@@ -264,7 +264,7 @@ console.log(Number.parseFloat('2.3px', 10));
 console.log(Number.isFinite(20));
 console.log(Number.isFinite('20'));
 console.log(Number.isFinite(+'20x'));
-*/
+
 
 // square root
 console.log(Math.sqrt(9));
@@ -279,3 +279,21 @@ const randomInt = (min, max) =>
   Math.floor(Math.random() * (max - min) + 1) + min;
 
 console.log(randomInt(5, 8));
+
+
+// creating dates
+console.log(account1);
+const now = new Date();
+console.log(now);
+console.log(new Date('December 24, 2022')); // logs Sat Dec 24 2022 00:00:00 GMT-0800 (Pacific Standard Time)
+console.log(new Date(2023, 3, 4, 15, 23, 6)); // logs Tue Apr 04 2023 15:23:06 GMT-0700 (Pacific Daylight Time)
+*/
+const future = new Date(2023, 3, 4, 15, 23);
+console.log(future);
+console.log(future.getFullYear()); //logs 2023
+console.log(future.getMonth()); //logs 3 (0 based like arrays)
+console.log(future.getDate()); //logs 4
+console.log(future.getDay()); //logs 2
+console.log(future.toISOString()); // logs 2023-04-04T22:23:00.000Z
+console.log(future.getTime()); // timestamp 1680646980000
+console.log(Date.now()); // logs 1673475509578
