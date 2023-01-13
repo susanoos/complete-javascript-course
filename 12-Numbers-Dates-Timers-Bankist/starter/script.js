@@ -210,10 +210,12 @@ btnLoan.addEventListener('click', function (e) {
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
-    currentAccount.movements.push(amount);
+    setTimeout(() => {
+      currentAccount.movements.push(amount);
 
-    // Update UI
-    updateUI(currentAccount);
+      // Update UI
+      updateUI(currentAccount);
+    }, 2500);
   }
   inputLoanAmount.value = '';
 });
@@ -287,7 +289,7 @@ const now = new Date();
 console.log(now);
 console.log(new Date('December 24, 2022')); // logs Sat Dec 24 2022 00:00:00 GMT-0800 (Pacific Standard Time)
 console.log(new Date(2023, 3, 4, 15, 23, 6)); // logs Tue Apr 04 2023 15:23:06 GMT-0700 (Pacific Daylight Time)
-*/
+
 const future = new Date(2023, 3, 4, 15, 23);
 console.log(future);
 console.log(future.getFullYear()); //logs 2023
@@ -297,3 +299,24 @@ console.log(future.getDay()); //logs 2
 console.log(future.toISOString()); // logs 2023-04-04T22:23:00.000Z
 console.log(future.getTime()); // timestamp 1680646980000
 console.log(Date.now()); // logs 1673475509578
+*/
+
+// setTimeout second parameter in miliseconds
+const ingredients = ['pepperoni', 'pineapple'];
+const pizzaTime = setTimeout(
+  (ing1, ing2) => {
+    console.log(`Here is your pizza with ${ing1} and ${ing2} 🍕`);
+  },
+  3000,
+  // arguments
+  ...ingredients
+);
+// stopping timeout
+if (ingredients.includes('pepperoni')) clearTimeout(pizzaTime);
+console.log(`waiting....`);
+
+// setInterval does something every time we specify an interval
+// setInterval(() => {
+//   const now = new Date();
+//   console.log(`${now.getHours()}:0${now.getMinutes()}:${now.getSeconds()}`);
+// }, 1000);
