@@ -234,7 +234,7 @@ Student.prototype.introduce = function () {
       tesla.accelerate();
       tesla.chargeBatt(95);
       tesla.accelerate();
-*/
+
 class PersonCl {
   constructor(fullName, birthYear) {
     this.fullName = fullName;
@@ -270,7 +270,156 @@ class Student extends PersonCl {
     super(fullName, birthYear);
     this.course = course;
   }
+
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}.`);
+  }
+
+  //overriding methods
+  calcAge() {
+    console.log(
+      `I am ${this.age} years old, but as a student I feel like ${
+        2023 - this.birthYear + 10
+      }.`
+    );
+  }
 }
 
-const david = new Student('David Escobar', 1998);
+const david = new Student('David Escobar', 1998, 'CS');
 const mariah = new Student('Mariah Sales', 1998, 'HR');
+david.introduce();
+mariah.introduce();
+mariah.calcAge();
+
+// Object.create
+const PersonProto = {
+  calcAge() {
+    console.log(2023 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+const naruto = Object.create(PersonProto);
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}.`);
+};
+
+const boruto = Object.create(StudentProto);
+boruto.init('Boruto', 2010, 'CS');
+boruto.introduce();
+boruto.calcAge();
+
+
+class Account {
+  //Public fields
+  locale = navigator.language;
+  //Private field uses '#' applies to methods as well
+  #movements = [];
+  #pin;
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+    // creating properties not in the constructor
+    // adding a '_' protects the data but the property is not truly private
+    // this._movements = [];
+    // this.locale = navigator.language;
+  }
+
+  // Public interface
+
+  //getting 'private' data
+  getMovements() {
+    return this.#movements;
+  }
+
+  deposit(val) {
+    this.#movements.push(val);
+    //allows chaining
+    return this;
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+    return this;
+  }
+}
+
+const acc1 = new Account('David', 'USD', 1998);
+console.log(acc1);
+
+// bad practice
+// acc1.movements.push(135);
+// acc1.movements.push(-50);
+
+//better
+acc1.deposit(400);
+acc1.withdraw(200);
+console.log(acc1); // movements: [400, -200]
+console.log(acc1.getMovements());
+
+// chaining methods
+acc1.deposit(400).deposit(200).withdraw(50).deposit(1000);
+console.log(acc1.getMovements()); //logs [400, -200, 400, 200, -50, 1000]
+*/
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is going ${this.speed} km/h`);
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`${this.make} is going ${this.speed} km/h`);
+  }
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+
+class EVCL extends CarCl {
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+
+  accelerate() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.make} is going at ${this.speed} km/h, with a charge of ${
+        this.#charge
+      }`
+    );
+    return this;
+  }
+  chargeBatt(battery) {
+    this.#charge = battery;
+    console.log(`Battery charged to ${this.#charge}`);
+    return this;
+  }
+}
+const evcl1 = new EVCL('Tesla', 60, 80);
+evcl1.accelerate();
+evcl1.chargeBatt(95);
+evcl1.accelerate().accelerate().chargeBatt(96).accelerate();
+console.log(evcl1.speedUS);
